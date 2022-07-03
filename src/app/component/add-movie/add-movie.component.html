@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="container my-4">
+  <form (ngSubmit)="!movieForm.invalid && addMovie()" #movieForm="ngForm">
+    <div class="alert alert-danger" role="alert" *ngIf="!image.valid">
+      Image URL is required.
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="!name.valid">
+      MovieName is required.
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        name="imageurl"
+        #image="ngModel"
+        [(ngModel)]="newModel.img"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Movie Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        #name="ngModel"
+        [(ngModel)]="newModel.moviename"
+        required
+      />
+    </div>
+    <div class="mb-3"></div>
+    <div class="mb-3"></div>
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select
+        name="category"
+        class="form-control"
+        [(ngModel)]="newModel.category"
+      >
+        <option value="Action/Thriller">Action/Thriller</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Action/Biography">Action/Biography</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">
+      Add Movie
+    </button>
+  </form>
+</div>

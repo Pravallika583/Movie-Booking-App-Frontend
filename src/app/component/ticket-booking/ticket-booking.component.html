@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+
+<div class="container my-4">
+  <h1 class="mb-3">Ticket Booking</h1>
+  <form (ngSubmit)="!movieForm.invalid && payment()" #movieForm="ngForm">
+    <div class="alert alert-danger" role="alert" *ngIf="!NoOfTickets.valid">
+      No Of Tickets is required.
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Movie Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="moviename"
+        #moviename="ngModel"
+        [disabled]="true"
+        [(ngModel)]="ticketbooking.moviename"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">NoOfTickets</label>
+      <input
+        type="text"
+        class="form-control"
+        name="NoOfTickets"
+        #NoOfTickets="ngModel"
+        required
+        [(ngModel)]="ticketbooking.noOfTickets"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        name="price"
+        #price="ngModel"
+        [disabled]="true"
+        [(ngModel)]="ticketbooking.price"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Timings</label>
+      <select
+        name="category"
+        class="form-control"
+        [(ngModel)]="ticketbooking.timings"
+      >
+        <option value="firstshow">9.00 AM</option>
+        <option value="secondshow">2.00 PM</option>
+        <option value="thirdshow">6.00 PM</option>
+        <option value="fourthshow">9.00 PM</option>
+      </select>
+    </div>
+    <h1>Total Amount: {{ ticketbooking.price * ticketbooking.noOfTickets }}</h1>
+    <button
+      type="submit"
+      class="btn btn-primary mx-3"
+      [disabled]="!movieForm.valid"
+      (click)="addbooking()"
+    >
+      Add Booking
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!movieForm.valid"
+      routerLink="/payment"
+    >
+      Payment
+    </button>
+  </form>
+</div>
